@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.List;
 import org.junit.After;
@@ -20,8 +21,10 @@ public class TestIterator {
   @Before
   public void setUp() throws Exception {
     list = new ArrayList<Integer>();
-    // TODO Question: Also try with a LinkedList - does it make any difference?
+   // list = new LinkedList<Integer>(); I can uncomment this and Test with LinkedList// TODO Question: Also try with a LinkedList - does it make any difference?
   }
+
+
 
   @After
   public void tearDown() throws Exception {
