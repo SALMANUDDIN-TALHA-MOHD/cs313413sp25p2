@@ -8,7 +8,8 @@ TestList.java
 
 		list.remove(5); // what does this method do?
 
-			 Answer : The code will remove the first occurrence of the element 5 from the list.
+			 Answer : It will not remove the number 5 from the list if it exists as a value. Instead, it removes the element at 
+                                  the position of index 5.
 
 		list.remove(Integer.valueOf(5)); // what does this one do?
 
