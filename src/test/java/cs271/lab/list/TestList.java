@@ -19,7 +19,7 @@ public class TestList {
   @Before
   public void setUp() throws Exception {
     list = new ArrayList<Integer>();
-    // TODO Question: Also try with a LinkedList - does it make any difference?
+    // list = new LinkedList<Integer>(); I can uncomment this and Test with LinkedList// TODO Question: Also try with a LinkedList - does it make any difference?
   }
 
   @After
