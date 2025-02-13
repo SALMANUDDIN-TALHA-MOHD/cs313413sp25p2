@@ -49,23 +49,22 @@ public class TestPerformance {
   public void testLinkedListAddRemove() {
     long startTime = System.nanoTime();
     for (var r = 0; r < REPS; r++) {
-      linkedList.add(0, 77);
-      linkedList.remove(0);
-      }
-      long endTime = System.nanoTime();
-      System.out.println("LinkedList Add/Remove Time: " + (endTime - startTime) + " ns");
-
+      linkedList.add(4, 40);
+      linkedList.remove(4);
+    }
+    long endTime = System.nanoTime();
+    System.out.println("LinkedList Add/Remove Time: " + (endTime - startTime) / 1_000_000.0 + " ms");
   }
 
   @Test
   public void testArrayListAddRemove() {
     long startTime = System.nanoTime();
     for (var r = 0; r < REPS; r++) {
-      arrayList.add(0, 77); // Adding at the beginning
-      arrayList.remove(0);  // Removing from the beginning
+      arrayList.add(4, 49);
+      arrayList.remove(4);
     }
     long endTime = System.nanoTime();
-    System.out.println("ArrayList Add/Remove Time: " + (endTime - startTime) + " ns");
+    System.out.println("ArrayList Add/Remove Time: " + (endTime - startTime) / 1_000_000.0 + " ms");
   }
 
   @Test
@@ -73,10 +72,10 @@ public class TestPerformance {
     var sum = 0L;
     long startTime = System.nanoTime();
     for (var r = 0; r < REPS; r++) {
-      sum += linkedList.get(r % SIZE);  // Accessing elements in a round-robin fashion
+      sum += linkedList.get(r % SIZE);
     }
     long endTime = System.nanoTime();
-    System.out.println("LinkedList Access Time: " + (endTime - startTime) + " ns");
+    System.out.println("LinkedList Access Time: " + (endTime - startTime) / 1_000_000.0 + " ms");
   }
 
   @Test
@@ -84,19 +83,21 @@ public class TestPerformance {
     var sum = 0L;
     long startTime = System.nanoTime();
     for (var r = 0; r < REPS; r++) {
-      sum += arrayList.get(r % SIZE);  // Accessing elements in a round-robin fashion
+      sum += arrayList.get(r % SIZE);
     }
     long endTime = System.nanoTime();
-    System.out.println("ArrayList Access Time: " + (endTime - startTime) + " ns");
+    System.out.println("ArrayList Access Time: " + (endTime - startTime) / 1_000_000.0 + " ms");
   }
+
+
   @Test
   public void testPerformanceWithDifferentSizes() {
-    // Try different sizes and run the performance tests for each
+
     int[] sizes = {10, 100, 1000, 10000};
     for (int size : sizes) {
       System.out.println("Running tests for SIZE = " + size);
 
-      // Resize the lists accordingly
+
       arrayList = new ArrayList<>(size);
       linkedList = new LinkedList<>();
       for (int i = 0; i < size; i++) {
@@ -104,42 +105,12 @@ public class TestPerformance {
         linkedList.add(i);
       }
 
-      // Test Add/Remove
-      long linkedListAddRemoveTime = recordTime(() -> {
-        for (var r = 0; r < REPS; r++) {
-          linkedList.add(0, 77);
-          linkedList.remove(0);
-        }
-      });
-      long arrayListAddRemoveTime = recordTime(() -> {
-        for (var r = 0; r < REPS; r++) {
-          arrayList.add(0, 77);
-          arrayList.remove(0);
-        }
-      });
+      testLinkedListAddRemove();
+      testArrayListAddRemove();
+      testLinkedListAccess();
+      testArrayListAccess();
 
-      // Test Access
-      long linkedListAccessTime = recordTime(() -> {
-        long sum = 0L;
-        for (var r = 0; r < REPS; r++) {
-          sum += linkedList.get(r % size);
-        }
-      });
-      long arrayListAccessTime = recordTime(() -> {
-        long sum = 0L;
-        for (var r = 0; r < REPS; r++) {
-          sum += arrayList.get(r % size);
-        }
-      });
-
-      // Output the results
-      System.out.printf("SIZE = %d\n", size);
-      System.out.printf("LinkedList Add/Remove Time: %d ns\n", linkedListAddRemoveTime);
-      System.out.printf("ArrayList Add/Remove Time: %d ns\n", arrayListAddRemoveTime);
-      System.out.printf("LinkedList Access Time: %d ns\n", linkedListAccessTime);
-      System.out.printf("ArrayList Access Time: %d ns\n", arrayListAccessTime);
       System.out.println("-----------------------------------");
     }
   }
-
 }
