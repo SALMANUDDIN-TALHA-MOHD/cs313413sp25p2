@@ -1,4 +1,8 @@
 COMP 313/413 Project 2 Report (ANSWERS)
+O
+TODO also try with a LinkedList-does it make any difference ?
+
+Answer : Yes, switching between Arraylist and Linkedlist can alter behaviour and performance, but method fuctionality remains unchanged as 	both implements the list interface.
 
 TestList.java and TestIterator.java
 
